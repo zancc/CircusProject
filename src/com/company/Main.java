@@ -59,6 +59,9 @@ public class Main {
 
 
                 if (players.get(i).getPosition() == 120) {
+                    //what are we going to do at the end? just end the game and announce
+                    // the winner or ask to repeat the game or not?
+
                     System.out.println("Game over. The winner is " + currentPlayer.getName());
                     endOfGame = true;
                 }
@@ -66,7 +69,7 @@ public class Main {
         }
     }
 
-    private static int readDiceValue() {
+    private static int readDiceValue() { // should clean up like inputToken() method
         boolean correctInput = false;
         int diceValue = 0;
         while (!correctInput) {
@@ -101,7 +104,7 @@ public class Main {
     }
 
 
-    private static int inputNumbOfPlayers() {
+    private static int inputNumbOfPlayers() { // should clean up like inputToken() method
         boolean correctInput = false;
         int numberOfPlayers = 1;
         while (!correctInput) {

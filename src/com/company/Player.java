@@ -32,14 +32,14 @@ public class Player {
     }
 
     @Override
-    public String toString() {
+    public String toString() { // needs to be corrected
         return "Player{" +
                 "name='" + name + '\'' +
                 ", token=" + token +
                 '}';
     }
 
-    public String boardAction(int fieldNumber) {
+    public String boardAction(int fieldNumber) { // needs to be added all other action fields
         String action = "";
 
         switch (fieldNumber) {
