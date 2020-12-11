@@ -37,11 +37,16 @@ public class Main {
                 diceValue = readDiceValue(); //reads and checks the dice value for player 1
                 System.out.println(diceValue);
 
+                currentPlayer.setFieldPrint(currentPlayer.getPosition(), ' '); //for the board printing
+
                 currentPlayer.addToPosition(diceValue); //adding the value of the dice to the position of player 1
                 System.out.println(currentPlayer.getName() + "Players position immediately after throwing the dice: "
                         + currentPlayer.getPosition()); //prints out players1 position
 
                 currentPlayer.boardAction(currentPlayer.getPosition());
+
+                currentPlayer.setFieldPrint(currentPlayer.getPosition(), currentPlayer.getToken()); //for the board printing
+
                 System.out.println(currentPlayer.getName() + "Players position after the action: " + currentPlayer.getPosition());
 
 

@@ -1,14 +1,23 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 public class Player {
     private String name;
     private char token;
     private int position;
+    private ArrayList<Character> fieldPrint = new ArrayList<Character>();
 
     public Player(String name, char token) {
         this.name = name;
         this.token = token;
         this.position = 1;
+        fieldPrint.add(' ');
+        fieldPrint.add(this.getToken());
+        for (int i = 2; i <= 120; i++) {
+            fieldPrint.add(' ');
+        }
     }
 
     public String getName() {
@@ -29,6 +38,14 @@ public class Player {
 
     public void addToPosition(int position) {
         this.position += position;
+    }
+
+    public ArrayList<Character> getFieldPrint() {
+        return fieldPrint;
+    }
+
+    public void setFieldPrint(int index, Character newValue) {
+        this.fieldPrint.set(index, newValue);
     }
 
     @Override
