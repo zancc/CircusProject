@@ -37,7 +37,7 @@ public class Main {
 
             for (int i = 0; i < numberOfPlayer; i++) {
                 Player currentPlayer = players.get(i); //currentPlayer is player that is currently playing
-                System.out.println("Enter the value of the dice thrown (1, 2, 3, 4, 5 or 6) by player " + currentPlayer.getName() +
+                System.out.println("Enter the value of the dice (1, 2, 3, 4, 5 or 6) thrown  by player " + currentPlayer.getName() +
                         "("+GameBoard.pic(GameBoard.CYAN, currentPlayer.getToken())+")");
                 diceValue = readDiceValue(); //reads and checks the dice value for player 1
                 //System.out.println(diceValue); //prints dice value (for debugging)
@@ -61,21 +61,26 @@ public class Main {
                     currentPlayer.setPosition(120 - (pos-120));
                     System.out.println(currentPlayer.getName() + " player crossed the end and returned back, current position: "
                             + currentPlayer.getPosition());
+
+                    currentPlayer.setFieldPrint(currentPlayer.getPosition(), ' '); //for the board printing
+                    action = currentPlayer.boardAction(currentPlayer.getPosition());
                     currentPlayer.setFieldPrint(currentPlayer.getPosition(), currentPlayer.getToken()); //for the board printing
-                }
 
+                    GameBoard.printBoard();
+                    System.out.println("\t"+action);
 
-
-                if (players.get(i).getPosition() == 120) {
+                } else if (players.get(i).getPosition() == 120) {
                     //what are we going to do at the end? just end the game and announce
                     // the winner or ask to repeat the game or not?
-
+                    GameBoard.printBoard();
                     System.out.println("Game over. The winner is " + currentPlayer.getName());
                     endOfGame = true;
+
+                } else {
+                    GameBoard.printBoard();
+                    System.out.println("\t"+action);
                 }
 
-                GameBoard.printBoard();
-                System.out.println("\t"+action);
             }
         }
     }
@@ -83,12 +88,12 @@ public class Main {
     private static int readDiceValue() {
         int diceValue;
         while (true) {
-            scanner.nextLine();
             while (!scanner.hasNextInt()) {
                 System.out.println("Invalid input. Enter the value of the dice thrown (1, 2, 3, 4, 5 or 6):");
                 scanner.nextLine();
             }
             diceValue = scanner.nextInt();
+            scanner.nextLine();
             if ( !(diceValue >= 1 && diceValue <= 6)) {
                 System.out.println("Dice value must be 1, 2, 3, 4, 5 or 6:");
             } else {
