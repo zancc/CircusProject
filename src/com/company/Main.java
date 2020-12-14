@@ -7,13 +7,14 @@ public class Main {
 
     public static Scanner scanner = new Scanner (System.in);
     public static ArrayList<Player> players = new ArrayList<>();
+    public static int numberOfPlayer;
 
     public static void main(String[] args) {
         String name;
         char token;
 
-        System.out.println("Choose the number of players (1 or 2):");
-        int numberOfPlayer = inputNumbOfPlayers();
+        System.out.println("Choose the number of players (1 to 4):");
+        numberOfPlayer = inputNumbOfPlayers();
         System.out.println("Number of players = " + numberOfPlayer);
 
 
@@ -26,30 +27,32 @@ public class Main {
             System.out.println(players.get(i));
         }
 
-        int diceValue = 0;
+        int diceValue;
         boolean endOfGame = false;
+
+        GameBoard.printBoard();
+
 
         while(!endOfGame) {
 
             for (int i = 0; i < numberOfPlayer; i++) {
-                Player currentPlayer = players.get(i);
-                System.out.println("Enter the value of the dice thrown (1, 2, 3, 4, 5 or 6) by player " + currentPlayer.getName());
+                Player currentPlayer = players.get(i); //currentPlayer is player that is currently playing
+                System.out.println("Enter the value of the dice thrown (1, 2, 3, 4, 5 or 6) by player " + currentPlayer.getName() +
+                        "("+GameBoard.pic(GameBoard.CYAN, currentPlayer.getToken())+")");
                 diceValue = readDiceValue(); //reads and checks the dice value for player 1
-                System.out.println(diceValue);
+                //System.out.println(diceValue); //prints dice value (for debugging)
 
                 currentPlayer.setFieldPrint(currentPlayer.getPosition(), ' '); //for the board printing
 
                 currentPlayer.addToPosition(diceValue); //adding the value of the dice to the position of player 1
-                System.out.println(currentPlayer.getName() + "Players position immediately after throwing the dice: "
-                        + currentPlayer.getPosition()); //prints out players1 position
+                //System.out.println(currentPlayer.getName() + " Players position immediately after throwing the dice: "
+                //        + currentPlayer.getPosition()); //prints out players1 position
 
-                currentPlayer.boardAction(currentPlayer.getPosition());
+                String action = currentPlayer.boardAction(currentPlayer.getPosition()); //prints and does the board action - goes forward/back
 
                 currentPlayer.setFieldPrint(currentPlayer.getPosition(), currentPlayer.getToken()); //for the board printing
 
-                System.out.println(currentPlayer.getName() + "Players position after the action: " + currentPlayer.getPosition());
-
-
+                System.out.println(currentPlayer.getName() + " Players position after the action: " + currentPlayer.getPosition());
 
 
                 // if player crosses the 120 mark - then needs to go back
@@ -58,7 +61,7 @@ public class Main {
                     currentPlayer.setPosition(120 - (pos-120));
                     System.out.println(currentPlayer.getName() + " player crossed the end and returned back, current position: "
                             + currentPlayer.getPosition());
-
+                    currentPlayer.setFieldPrint(currentPlayer.getPosition(), currentPlayer.getToken()); //for the board printing
                 }
 
 
@@ -70,14 +73,17 @@ public class Main {
                     System.out.println("Game over. The winner is " + currentPlayer.getName());
                     endOfGame = true;
                 }
+
+                GameBoard.printBoard();
+                System.out.println("\t"+action);
             }
         }
     }
 
-    private static int readDiceValue() { // should clean up like inputToken() method
-        boolean correctInput = false;
-        int diceValue = 0;
-        while (!correctInput) {
+    private static int readDiceValue() {
+        int diceValue;
+        while (true) {
+            scanner.nextLine();
             while (!scanner.hasNextInt()) {
                 System.out.println("Invalid input. Enter the value of the dice thrown (1, 2, 3, 4, 5 or 6):");
                 scanner.nextLine();
@@ -85,49 +91,41 @@ public class Main {
             diceValue = scanner.nextInt();
             if ( !(diceValue >= 1 && diceValue <= 6)) {
                 System.out.println("Dice value must be 1, 2, 3, 4, 5 or 6:");
-                correctInput = false;
             } else {
-                correctInput = true;
                 return diceValue;
             }
         }
-        return diceValue;
     }
 
     private static char inputToken() {
-        char playerToken = ' ';
+        char playerToken;
         while (true) {
             String playerInput = scanner.nextLine();
             if (playerInput.length() == 1) {
                 playerToken = playerInput.charAt(0);
-//                System.out.println("This players chosen token is: " + playerToken);
                 return playerToken;
             } else {
-                System.out.println("Invalid input. Enter token that is one symbol:");
+                System.out.println("Invalid input. Token must be one symbol:");
             }
         }
     }
 
 
-    private static int inputNumbOfPlayers() { // should clean up like inputToken() method
-        boolean correctInput = false;
-        int numberOfPlayers = 1;
-        while (!correctInput) {
+    private static int inputNumbOfPlayers() {
+        int numberOfPlayers ;
+        while (true) {
             while (!scanner.hasNextInt()) {
-                System.out.println("Invalid input. Choose the number of players (1 or 2):");
+                System.out.println("Invalid input. Choose the number of players (1 to 4):");
                 scanner.nextLine();
             }
             numberOfPlayers = scanner.nextInt();
             scanner.nextLine();
-            if ( !(numberOfPlayers == 1 || numberOfPlayers == 2)) {
-                System.out.println("Number of players must be 1 or 2:");
-                correctInput = false;
+            if ( !(numberOfPlayers == 1 || numberOfPlayers == 2 || numberOfPlayers == 3 || numberOfPlayers == 4)) {
+                System.out.println("Number of players must be 1, 2, 3 or 4:");
             } else {
-                correctInput = true;
                 return numberOfPlayers;
             }
         }
-        return numberOfPlayers;
     }
 
 }
