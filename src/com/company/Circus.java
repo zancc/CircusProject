@@ -51,14 +51,14 @@ public class Circus {
 
                 currentCircusPlayer.setFieldPrint(currentCircusPlayer.getPosition(), currentCircusPlayer.getToken()); //for the board printing
 
-                System.out.println(currentCircusPlayer.getName() + " Players position after the action: " + currentCircusPlayer.getPosition());
+                System.out.println(currentCircusPlayer.getName() + "'s position after the action: " + currentCircusPlayer.getPosition());
 
 
                 // if player crosses the 120 mark - then needs to go back
                 if (currentCircusPlayer.getPosition() > 120) {
                     int pos = currentCircusPlayer.getPosition();
                     currentCircusPlayer.setPosition(120 - (pos-120));
-                    System.out.println(currentCircusPlayer.getName() + " player crossed the end and returned back, current position: "
+                    System.out.println(currentCircusPlayer.getName() + " crossed the end and returned back, current position: "
                             + currentCircusPlayer.getPosition());
 
                     currentCircusPlayer.setFieldPrint(currentCircusPlayer.getPosition(), ' '); //for the board printing
@@ -77,7 +77,8 @@ public class Circus {
 
                 } else {
                     CircusGameBoard.printBoard();
-                    System.out.println("\t"+action);
+                    System.out.println("\t"+currentCircusPlayer.getName()+"("+
+                            CircusGameBoard.pic(CircusGameBoard.CYAN, currentCircusPlayer.getToken())+") - "+action);
                 }
 
             }

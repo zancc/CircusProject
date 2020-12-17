@@ -50,7 +50,7 @@ public class CircusPlayer {
     }
 
     @Override
-    public String toString() { // needs to be corrected
+    public String toString() {
         return "Player{" +
                 "name='" + name + '\'' +
                 ", token=" + token +
