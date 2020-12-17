@@ -5,3 +5,7 @@ Then players throw a dice one after another and inputs the result in the console
 There are 120 fields on this game. Most of them are regular without any special properties, however some have property to move players symbol back or further in the game.
 These properties are applied automatically by the program and shortly described.
 The player who is first to reach field No.120 (with exact number thrown on the dice) is announced the winner.
+
+
+
+(No animals were harmed during the making of this program.)
