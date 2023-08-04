@@ -6,6 +6,6 @@ There are 120 fields on this game. Most of them are regular without any special 
 These properties are applied automatically by the program and shortly described.
 The player who is first to reach field No.120 (with exact number thrown on the dice) is announced the winner.
 
-
+Program was built during She Goes Tech
 
 (No animals were harmed during the making of this program.)
